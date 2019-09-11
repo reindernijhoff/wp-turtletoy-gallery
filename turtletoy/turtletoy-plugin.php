@@ -102,7 +102,7 @@ function turtletoy_list($atts) {
 
 function turtletoy_layout_turtle($info, $hideusername) {
 	$html = '<li class="blocks-gallery-item"><figure>';
-	$html .= '<a href="https://turtletoy.net/turtle/' . $info['turtle_id'] . '" title="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . "&#10;&#10;" . htmlentities($info['description']) .'">';
+	$html .= '<a href="https://turtletoy.net/turtle/' . $info['turtle_id'] . '" title="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . "&#10;&#10;" .  str_replace("\n", '&#10;', htmlentities($info['description'])) .'">';
 	$html .= '<img src="' . $info['img'] . '" style="width:100%" alt="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . '">';
 	$html .= '<figcaption>' . $info['title'] . (!$hideusername?'<br/>by ' . $info['user_id']:'') . '</figcaption>';
 	$html .= '</a>';
