@@ -61,7 +61,10 @@ function turtletoy_do_query($query, $timeout = 60*60) {
 		$url = 'https://turtletoy.net/api/v1/' . $query;
 		$json = turtletoy_curl_get_contents($url);
 
-		$wpdb->query( $wpdb->prepare( "REPLACE INTO $table_name( id, data, expires ) VALUES ( %s, %s, NOW() + INTERVAL %d SECOND )", $dbkey, $json, $timeout ) );
+		json_decode($json);
+		if (json_last_error() != JSON_ERROR_NONE) {
+			$wpdb->query( $wpdb->prepare( "REPLACE INTO $table_name( id, data, expires ) VALUES ( %s, %s, NOW() + INTERVAL %d SECOND )", $dbkey, $json, $timeout ) );
+		}
 	}
 
 	$obj = json_decode($json, true);
@@ -102,7 +105,7 @@ function turtletoy_list($atts) {
 
 function turtletoy_layout_turtle($info, $hideusername) {
 	$html = '<li class="blocks-gallery-item"><figure>';
-	$html .= '<a href="https://turtletoy.net/turtle/' . $info['turtle_id'] . '" title="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . "&#10;&#10;" .  str_replace("\n", '&#10;', htmlentities($info['description'])) .'">';
+	$html .= '<a href="' . $info['url'] . '" title="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . "&#10;&#10;" .  str_replace("\n", '&#10;', htmlentities($info['description'])) .'">';
 	$html .= '<img src="' . $info['img'] . '" style="width:100%" alt="' . htmlentities($info['title'] . ' by ' . $info['user_id']) . '">';
 	$html .= '<figcaption>' . $info['title'] . (!$hideusername?'<br/>by ' . $info['user_id']:'') . '</figcaption>';
 	$html .= '</a>';
