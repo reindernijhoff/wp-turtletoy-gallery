@@ -82,7 +82,7 @@ function turtletoy_list($atts) {
 	$username = $a['username'];
 
 	$list = turtletoy_do_query($a['query']);
-	$results = $list["turtles"];
+	$results = $list["objects"];
 
 	$html = '<ul class="wp-block-gallery columns-' . $a['columns'] . ' is-cropped">';
 
