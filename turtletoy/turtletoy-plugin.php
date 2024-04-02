@@ -27,14 +27,11 @@ function turtletoy_curl_get_contents($url) {
 }
 
 function turtletoy_do_query($query, $timeout = 60 * 60) {
-	global $wpdb;
-	$table_name = $wpdb->prefix . 'turtletoy';
-
 	$timeout += intval(rand(0, $timeout)); // prevent that all cached items get invalid at the same time
 
 	$data = '';
 
-	$dbkey = $query;
+	$dbkey = 'turtletoy_' . $query;
 
 	$cached = get_transient($dbkey);
 	if ($cached) {
