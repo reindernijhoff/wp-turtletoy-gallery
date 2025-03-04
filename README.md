@@ -40,6 +40,13 @@ To show only turtles from a specific user:
 * limit – Optional; default=0 (unlimited). Maximum number of turtles to show if set > 0.
 * hideusername – Optional; default=0. Set to 1 to hide the turtle’s username.
 
+## External services
+
+This plugin connects to the Turtletoy API to fetch a list of all turtles that are displayed in the gallery.
+
+It sends the optional arguments of the short code to perform the query.
+This service is provided by Turtletoy: [Terms of Service and Privacy Policy](https://turtletoy.net/terms).
+
 ## Frequently Asked Questions 
 
 ### Why are images loaded from an external source? 
