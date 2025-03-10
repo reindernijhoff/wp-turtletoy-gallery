@@ -38,15 +38,12 @@ Insert the `[turtletoy-list]` shortcode wherever you want the gallery to appear.
 
 Example:
 
-```
-[turtletoy-list query="turtle/browse/love/"]
-```
+`[turtletoy-list query="turtle/browse/love/"]`
 
 To show only turtles from a specific user:
 
-```
-[turtletoy-list query="user/USERNAME/love/"]
-```
+`[turtletoy-list query="user/USERNAME/love/"]`
+
 
 == Optional Attributes ==
 
