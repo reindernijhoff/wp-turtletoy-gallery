@@ -39,12 +39,6 @@ function turtletoy_do_query($query, $timeout = 60 * 60)
         $json = json_decode($data);
 
         if (json_last_error() == JSON_ERROR_NONE) {
-            // add license to each object
-            foreach ($json->objects as $value) {
-                // fetch json from https://turtletoy.net/api/v1/turtle/ id /license
-                $license = json_decode(turtletoy_fetch('https://turtletoy.net/api/v1/turtle/' . $value->object_id . '/license'));
-                $value->license = $license->url;
-            }
             $data = json_encode($json);
 
             set_transient($dbkey, $data, $timeout + wp_rand(0, $timeout));
