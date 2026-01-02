@@ -62,7 +62,7 @@ function turtletoy_list($atts)
     $list = turtletoy_do_query($a['query']);
     $results = $list["objects"];
 
-    $html = '<ul class="wp-block-gallery columns-' . esc_attr($a['columns']) . ' is-cropped">';
+    $html = '<figure class="turtletoy-gallery turtletoy-columns-' . esc_attr($a['columns']) . '">';
 
     $start = microtime(TRUE);
 
@@ -84,7 +84,7 @@ function turtletoy_list($atts)
     }
 
 
-    $html .= '</ul>';
+    $html .= '</figure>';
 
     $html .= '<script type="application/ld+json">' . wp_json_encode($ldJSON) . '</script>';
 
@@ -128,20 +128,30 @@ function turtletoy_ld_json($info)
 // We directly link images from the turtletoy.net domain, as users can update the preview images without notice.
 function turtletoy_layout_turtle($info, $hideusername)
 {
-    $html = '<li class="blocks-gallery-item"><figure>';
+    $html = '<figure class="turtletoy-gallery-item">';
     $html .= '<a href="' . esc_url($info['url']) . '" title="' . esc_attr($info['title'] . ' by ' . $info['user_id']) . '">';
     $html .= '<picture>';
     $html .= '<source type="image/webp" srcset="' . esc_url($info['webp']) . '" />';
     $html .= '<img src="' . esc_url($info['img']) . '" alt="' . esc_attr(str_replace("\n", '&#10;', $info['description'])) . '" width="512" height="512" />';
     $html .= '</picture>';
-    $html .= '<figcaption>' . esc_html($info['title']) . (!$hideusername ? '<br/>by ' . esc_html($info['user_id']) : '') . '</figcaption>';
     $html .= '</a>';
-    $html .= '</figure></li>';
+    $html .= '<figcaption>' . esc_html($info['title']) . (!$hideusername ? '<br/>by ' . esc_html($info['user_id']) : '') . '</figcaption>';
+    $html .= '</figure>';
 
     return $html;
 }
 
 // phpcs:enable
 
+function turtletoy_enqueue_styles() {
+    wp_enqueue_style(
+        'turtletoy-gallery',
+        plugin_dir_url(__FILE__) . 'turtletoy-gallery.css',
+        array(),
+        '1.0.0'
+    );
+}
+
 register_activation_hook(__FILE__, 'turtletoy_install');
+add_action('wp_enqueue_scripts', 'turtletoy_enqueue_styles');
 add_shortcode('turtletoy-list', 'turtletoy_list');
