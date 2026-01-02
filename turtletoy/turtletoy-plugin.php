@@ -4,7 +4,7 @@
 Plugin Name: Turtletoy Gallery
 Plugin URI: https://github.com/reindernijhoff/wp-turtletoy-gallery
 Description: A WordPress plugin to display Turtletoy galleries.
-Version: 1.0
+Version: 1.0.1
 Author: Reinder Nijhoff
 Author URI: https://reindernijhoff.net/
 License: GPL2
